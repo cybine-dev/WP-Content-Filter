@@ -1,20 +1,18 @@
-(function($){
-	// Implementation for the Ajax Custom Post Type Filter
-	var url = window.location.href;
-	$('p.invi input').val(url);
-	// The Filter
-	$('#filter').submit(nxt_tut_filter());
-})(jQuery)
+const nxt_filter = (event)
+{
+	// use document.querySelector(selector) to use css-selectors
+	let filterElement = document.getElementById('filter');
+	let responseElement = document.getElementById('response');
 
-function nxt_tut_filter(){
-	var filter = jQuery('#filter');
-	jQuery.ajax({
-		url:filter.attr('action'),
-		type:filter.attr('method'), // POST
-		data:filter.serialize(), // form data
-		success:function(data){
-			jQuery('#response').html(data); // insert data
-		}
+	// using js fetch-api to query data
+	let result = await fetch(filterElement.getAttribute('action'), 
+	{
+		method: filterElement.getAttribute('method'), // POST
+		body: new FormData(filterElement) // form data
 	});
-	return false;
+
+	let content = await result.text();
+
+	// insert data
+	responseElement.innerHTML = content;
 }
