@@ -1,4 +1,4 @@
-const nxt_filter = (event)
+const nxt_filter = async (event) =>
 {
 	// use document.querySelector(selector) to use css-selectors
 	let filterElement = document.getElementById('filter');
