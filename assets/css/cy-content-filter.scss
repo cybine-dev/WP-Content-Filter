@@ -1,0 +1,92 @@
+$bg: rgb(18, 27, 35) !default;
+$selects: rgb(20, 30, 39) !default;
+$text: #000 !default; 
+$arrow: #666 !default;
+$padding: 1.5rem !default;
+$label-weight: 700 !default;
+$label-size: .9rem !default;
+$fi-padding: 70%;
+
+/* #region Custom Crap */
+.cy-content-filter--response 
+{
+	.et_pb_button 
+    {
+		background-color: #F19F00;
+	}
+}
+/* #endregion Custom Crap */
+
+/* #region Filter */
+.cy-content-filter--wrapper 
+{
+    margin-bottom: 2rem;
+	padding: $padding;
+
+	background-color: $bg;
+}
+
+.cy-content-filter--options
+{
+    display: grid;
+    
+    gap: 1rem;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+    label 
+    {
+        font-size: $label-size;
+        font-weight: $label-weight;
+    }
+
+    .select_container 
+    {
+		@extend %magic_select;
+	}
+}
+/* #endregion Filter */
+
+/* #region Posts Feed */
+.nxt_afp_posts 
+{
+	display: grid;
+
+	gap: 1rem;
+	grid-auto-flow: row;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	
+    > article 
+    {
+		max-width: 440px;
+	}
+}
+
+.featured-image-container 
+{
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+
+	padding-top: $fi-padding;
+}
+/* #endregion Posts Feed */
+
+/* #region Forms & Selects */
+%magic_select 
+{
+	position: relative;
+	background: $selects;
+
+	select 
+    {
+		appearance: none;
+		border: none;
+		cursor: pointer;
+		font-size: 1rem;
+		outline: none;
+		padding: .75rem .5rem;
+		position: relative;
+		width: 100%;
+	}
+}
