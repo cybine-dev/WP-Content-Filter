@@ -3,13 +3,26 @@
 require_once __DIR__ . '/searchbox.php';
 require_once __DIR__ . '/postfilter.php';
 
+$response_args = [
+    'no-content-class' => 'no-results entry-title',
+    'no-content-text' => 'Es wurden leider keine Tutorials für diese Suchkriterien gefunden',
+
+    'headline-tag' => 'h3',
+
+    'button-wrapper-class' => 'et_pb_button_module_wrapper et_pb_module et_pb_button_alignment_',
+
+    'button-class' => 'et_pb_button et_pb_module et_pb_bg_layout_dark'
+];
+
 function cy_content_filter_shortcode($atts = null, $content = null)
 {
+    global $response_args;
+
     $post_filter = new CybineContentFilterPostFilter();
 
     $args = shortcode_atts([
         'post_types' => 'post',
-        'response-initial-data' => $post_filter->fetchFeed(null, null),
+        'response-initial-data' => $post_filter->fetchFeed(null, $response_args),
         'filters' => [
             [
                 'type' => 'search',
@@ -97,17 +110,9 @@ function cy_content_filter_shortcode($atts = null, $content = null)
 
 function cy_content_filter_feed()
 {
-    $filter = [
-        'no-content-class' => 'no-results entry-title',
-        'no-content-text' => 'Es wurden leider keine Tutorials für diese Suchkriterien gefunden',
+    global $response_args;
 
-        'headline-tag' => 'h3',
-
-        'button-wrapper-class' => 'et_pb_button_module_wrapper et_pb_module et_pb_button_alignment_',
-
-        'button-class' => 'et_pb_button et_pb_module et_pb_bg_layout_dark'
-    ];
-
+    $filter = [];
     if (isset($_POST['category']) && $_POST['category'] != 'Alle') 
     {
         $filter['cat'] = $_POST['category'];
@@ -130,5 +135,5 @@ function cy_content_filter_feed()
 
     $post_filter = new CybineContentFilterPostFilter();
 
-    exit($post_filter->fetchFeed($filter, null));
+    exit($post_filter->fetchFeed($filter, $response_args));
 }
