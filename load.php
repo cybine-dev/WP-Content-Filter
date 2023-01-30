@@ -7,9 +7,9 @@ require_once __DIR__ . '/modules/shortcode.php';
 
 function add_cy_content_filter_scripts()
 {
-    wp_register_script('cy_content_filter_scripts', plugins_url('cybine-content-filter', __DIR__) . '/assets/js/cy-content-filter.js', [], time());
+    wp_register_script('cy_content_filter_scripts', plugins_url('cybine-content-filter', __DIR__) . '/assets/js/cy-content-filter.js', [], '1.0.0');
     wp_enqueue_script('cy_content_filter_scripts');
-    
+
     wp_enqueue_style('cy_content_filter_styles', plugins_url('cybine-content-filter', __DIR__) . '/assets/css/cy-content-filter.css');
 }
 
